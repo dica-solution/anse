@@ -2,8 +2,8 @@ import { createEffect, createSignal, on } from 'solid-js'
 import { convertReadableStreamToAccessor } from '@/logics/stream'
 import { updateMessage } from '@/stores/messages'
 import { deleteStreamById, getStreamByConversationId } from '@/stores/streams'
-import Markdown from './Markdown'
 import { convertLatexType } from '@/logics/helper'
+import Markdown from './Markdown'
 
 interface Props {
   class?: string
@@ -27,7 +27,7 @@ export default (props: Props) => {
   createEffect(async() => {
     const text = props.text
     if (props.text) {
-      setLocalText(text)
+      setLocalText(convertLatexType(text))
     } else if (props.streamInfo) {
       const streamInfo = props.streamInfo()
       const streamInstance = getStreamByConversationId(streamInfo.conversationId)
