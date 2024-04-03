@@ -7,6 +7,7 @@ import { loadingStateMap, streamsMap } from '@/stores/streams'
 import { handlePrompt } from '@/logics/conversation'
 import { globalAbortController } from '@/stores/settings'
 import { useI18n } from '@/hooks'
+import { convertLatexType } from '@/logics/helper'
 import Button from './ui/Button'
 
 export default () => {
@@ -137,7 +138,8 @@ export default () => {
 
     const controller = new AbortController()
     globalAbortController.set(controller)
-    handlePrompt(currentConversation(), inputRef.value, controller.signal)
+
+    handlePrompt(currentConversation(), convertLatexType(inputRef.value), controller.signal)
     clearPrompt()
     scrollController().scrollToBottom()
   }
