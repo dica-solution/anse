@@ -3,6 +3,7 @@ import { convertReadableStreamToAccessor } from '@/logics/stream'
 import { updateMessage } from '@/stores/messages'
 import { deleteStreamById, getStreamByConversationId } from '@/stores/streams'
 import Markdown from './Markdown'
+import { convertLatexType } from '@/logics/helper'
 
 interface Props {
   class?: string
@@ -34,7 +35,7 @@ export default (props: Props) => {
         const finalText = await convertReadableStreamToAccessor(streamInstance.stream, setLocalText)
         setLocalText(finalText)
         updateMessage(streamInfo.conversationId, streamInfo.messageId, {
-          content: finalText,
+          content: convertLatexType(finalText),
           stream: false,
         })
       }
