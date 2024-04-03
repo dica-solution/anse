@@ -26,3 +26,7 @@ export const promptHelper = {
     ].join('\n')
   },
 }
+
+export const convertLatexType = (text: string) => {
+  return text.replace(/\\\(([^)]+)\\\)/g, '$$$1$').replace(/\\\[([^\]]+)\\\]/g, '$$$$$1$$$')
+}
